@@ -18,15 +18,17 @@
     </div>
 
     <!-- Week tabs (thin pill style) -->
+     <!-- bg-green-500 text-white -->
+    <h1>{{day}}</h1>
     <div class="mt-8">
       <ul class="flex gap-3 text-sm font-medium">
-        <li><a class="px-3 py-2 rounded hover:bg-gray-100" href="#">Monday</a></li>
-        <li><a class="px-3 py-2 rounded hover:bg-gray-100" href="#">Tuesday</a></li>
-        <li><a class="px-3 py-2 rounded hover:bg-gray-100" href="#">Wednesday</a></li>
-        <li><a class="px-3 py-2 rounded bg-green-500 text-white" href="#">Thursday</a></li>
-        <li><a class="px-3 py-2 rounded hover:bg-gray-100" href="#">Friday</a></li>
-        <li><a class="px-3 py-2 rounded hover:bg-gray-100" href="#">Saturday</a></li>
-        <li><a class="px-3 py-2 rounded hover:bg-gray-100" href="#">Sunday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'monday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'monday' %}">Monday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'tuesday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'tuesday' %}">Tuesday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'wednesday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'wednesday' %}">Wednesday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'thursday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'thursday' %}">Thursday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'friday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'friday' %}">Friday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'saturday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'saturday' %}">Saturday</a></li>
+        <li><a class="px-3 py-2 rounded {% if day == 'sunday' %}bg-green-500 text-white{% else %}hover:bg-gray-100{% endif %}" href="{% url 'planner:meal' 'sunday' %}">Sunday</a></li>
       </ul>
     </div>
   </div>
