@@ -3,5 +3,80 @@
 
 
 {% block content %}
-   <h3 class="prose prose-slate dark:prose-invert">This is a content being dynamic render by base.html</h3>
+
+<div class="border rounded-lg overflow-hidden shadow-sm">
+    <!-- Table Header -->
+    <div class="grid grid-cols-5 bg-gray-100 font-semibold text-sm py-2 px-4">
+        <div>Meal</div>
+        <div>Food</div>
+        <div>Servings</div>
+        <div>Notes</div>
+        <div>Actions</div>
+    </div>
+
+    {% for meal in meals %}
+        {% if meal.week_day == day %}
+            <div class="grid grid-cols-5 border-t items-center">
+
+                <!-- Left meal type label w/ color block -->
+                <div class="flex items-center gap-3 px-4 py-3">
+                    {% if meal.type == "1" %}
+                        <div class="w-4 h-4 rounded bg-pink-300"></div>
+                        <span class="font-medium">Breakfast</span>
+                    {% elif meal.type == "2" %}
+                        <div class="w-4 h-4 rounded bg-blue-300"></div>
+                        <span class="font-medium">Lunch</span>
+                    {% elif meal.type == "3" %}
+                        <div class="w-4 h-4 rounded bg-green-300"></div>
+                        <span class="font-medium">Dinner</span>
+                    {% elif meal.type == "4" %}
+                        <div class="w-4 h-4 rounded bg-yellow-300"></div>
+                        <span class="font-medium">Snacks</span>
+                    {% endif %}
+                </div>
+
+                <!-- Name -->
+                <div class="px-4 py-3 text-lg font-semibold">
+                    {{ meal.name }}
+                </div>
+
+                <!-- Servings -->
+                <div class="px-4 py-3 text-xl font-bold">
+                    {{ meal.servings }}
+                </div>
+
+                <!-- Notes -->
+                <div class="  flex items-center">
+                    {{ meal.notes }}
+                </div>
+
+                <!-- Actions -->
+               <div class="  flex items-center gap-3">
+                    <!-- EDIT BUTTON -->
+                     <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#5B4BFF] text-white
+                                    hover:bg-[#4a3be6] transition">
+                        ✎
+                     </button>
+
+                     <form method="POST" action="{% url 'planner:delete_meal' meal.id %}" class="inline">
+                        {% csrf_token %}
+                        <!-- DELETE BUTTON -->
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-red-500 text-white
+                                       hover:bg-red-600 transition">
+                           ✕
+                        </button>
+                     </form>
+                </div>
+
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="flex justify-center mt-6">
+    <button class="px-6 py-3 bg-[#5B4BFF] text-white font-semibold rounded-lg 
+               shadow hover:bg-[#4a3be6] transition">
+    Add Meal
+</button>
+</div>
+
 {% endblock %}
