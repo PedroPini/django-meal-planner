@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Meal Muse{% endblock %}</title>
+
+  <!-- Tailwind CDN (quick prototyping) + tiny config for custom colors/fonts -->
+
+  <!-- Load Tailwind first -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Then apply your Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            musePurple: '#B868E6',
+            musePink: '#F8E7EF',
+            museBlue: '#DCEEFF',
+            museGreen: '#DBF7D7',
+            museAccent: '#F6D94F'
+          },
+          fontFamily: {
+            display: ['"Poppins"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Local overrides (optional) -->
+  <link href="{% static 'css/app.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen font-display">
+
+  {% include "header.html" %}
+<!-- DRY - Dont repeat yourself-->
+  <main class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-10">
+    {% block content %}
+    <!-- page content -->
+    {% endblock %}
+  </main>
+
+  {% include "footer.html" %}
+</body>
+</html>
