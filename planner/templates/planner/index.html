@@ -20,6 +20,7 @@
 
                 <!-- Left meal type label w/ color block -->
                 <div class="flex items-center gap-3 px-4 py-3">
+
                     {% if meal.type == "1" %}
                         <div class="w-4 h-4 rounded bg-pink-300"></div>
                         <span class="font-medium">Breakfast</span>
@@ -52,11 +53,16 @@
 
                 <!-- Actions -->
                <div class="  flex items-center gap-3">
-                    <!-- EDIT BUTTON -->
-                     <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#5B4BFF] text-white
-                                    hover:bg-[#4a3be6] transition">
-                        ✎
-                     </button>
+                  {{meal.id}}AAAAAA
+                  <form method="GET" action="{% url 'planner:edit_meal' meal.id %}" class="inline">
+                        {% csrf_token %}  
+                        <!-- EDIT BUTTON -->
+                        <button type="submit" class="w-8 h-8 flex items-center justify-center rounded-full bg-[#5B4BFF] text-white
+                                       hover:bg-[#4a3be6] transition"
+                                       >
+                           ✎ 
+                        </button>
+                  </form>
 
                      <form method="POST" action="{% url 'planner:delete_meal' meal.id %}" class="inline">
                         {% csrf_token %}
@@ -72,11 +78,6 @@
         {% endif %}
     {% endfor %}
 </div>
-<div class="flex justify-center mt-6">
-    <button class="px-6 py-3 bg-[#5B4BFF] text-white font-semibold rounded-lg 
-               shadow hover:bg-[#4a3be6] transition">
-    Add Meal
-</button>
-</div>
+{% include 'planner/form.html' %}
 
 {% endblock %}
