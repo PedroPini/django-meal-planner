@@ -9,16 +9,11 @@ def index(request):
 
 
 def meal(request, week_day, meal_id=None):
-     meal_types = {
-        "1": "Breakfast",
-        "2": "Lunch",
-        "3": "Dinner",
-        "4": "Snacks",
-    }
+
      
      context = {
         'day': week_day,
-        "meal_types": meal_types,
+     
         'meals': MEALS,
         'meal': {"id": meal_id}
         }
@@ -40,9 +35,25 @@ def delete_meal(request, meal_id):
 
 def edit_meal(request, meal_id):
     global MEALS
-    print("EDIT", request.POST)
-
     meal_to_edit = next((m for m in MEALS if m['id'] == meal_id), None)
+
+    if request.POST:
+        week_day = request.POST.get("week_day", meal_to_edit['week_day'])
+
+        # Update fields from POST
+        meal_to_edit['name'] = request.POST.get("name", meal_to_edit['name'])
+        meal_to_edit['week_day'] = week_day
+        meal_to_edit['type'] = request.POST.get("type", meal_to_edit['type'])
+        meal_to_edit['taste'] = request.POST.get("taste", meal_to_edit['taste'])
+        meal_to_edit['servings'] = request.POST.get("servings", meal_to_edit['servings'])
+        meal_to_edit['notes'] = request.POST.get("notes", meal_to_edit['notes'])
+
+        # (OPTIONAL) Prevent week_day editing — but if you want it editable,
+        # uncomment the line below:
+        # meal_to_edit['week_day'] = request.POST.get("week_day", meal_to_edit['week_day'])
+
+        return redirect('planner:meal', week_day=week_day)
+    
 
     if meal_to_edit:
         context = {
@@ -56,7 +67,7 @@ def edit_meal(request, meal_id):
         }
 
         return render(request, "planner/edit.html", {'meal': context})
-       
+    
     return redirect('planner:meal', week_day='monday')
 
 def edit2_meal(request, meal_id):

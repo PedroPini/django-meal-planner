@@ -35,8 +35,9 @@
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen font-display">
 
-  {% include "header.html" %}
+{% include "header.html" %}
 <!-- DRY - Dont repeat yourself-->
+ <!-- KIS KEEP IT SIMPLE -->
   <main class="">
     {% block content %}
     <!-- page content -->
@@ -46,3 +47,19 @@
   {% include "footer.html" %}
 </body>
 </html>
+
+<!-- 
+config/ *.json
+
+*.json -> for loop
+
+index.html -> selection of the user
+
+test.json
+
+test.html -> using test.json config
+
+test.html
+
+
+-->
